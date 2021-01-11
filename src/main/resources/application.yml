@@ -1,0 +1,13 @@
+spring:
+  http:
+    encoding:
+      enabled: true
+      charset: utf-8
+      force: true
+
+  application:
+    name: keshuo-service
+  profiles:
+#    active: test
+    #active: dev
+    active: prod
