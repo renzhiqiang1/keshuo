@@ -30,6 +30,7 @@ public class InterfaceController {
      */
     @RequestMapping(value = "/getUpstreamInfo")
     public void getUpstreamInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         PageData pd = new PageData(request);
         if(pd.isEmpty()){
             ControllerUtils.returnJsonError(request, response, "参数不能为空",-1);

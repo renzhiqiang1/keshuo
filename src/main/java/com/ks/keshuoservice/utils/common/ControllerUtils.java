@@ -87,7 +87,6 @@ public abstract class ControllerUtils {
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
 		response.setHeader("Access-Control-Allow-Credentials","true"); //是否支持cookie跨域
 		TypeUtils.compatibleWithJavaBean=true;
-
 		RemoteResult jr = new RemoteResult(false,code,result.toString());
 		try {
 			PrintWriter pw = response.getWriter();

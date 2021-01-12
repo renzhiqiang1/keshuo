@@ -30,6 +30,7 @@ public class InterManageController {
         PageData pd = new PageData(request);
         if(pd.isEmpty()){
             ControllerUtils.returnJsonError(request, response, "参数不能为空",-1);
+
         }else{
             String pageNum = (String) pd.get("pageNum");
             String pageSize = (String) pd.get("pageSize");
