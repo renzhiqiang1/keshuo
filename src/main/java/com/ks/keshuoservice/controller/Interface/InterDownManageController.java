@@ -24,6 +24,7 @@ public class InterDownManageController {
      * 查询下游信息分页
      * @param request
      * @param response
+<<<<<<< HEAD
      * @param pageHelperData
      */
     @RequestMapping("/queryDownManageInfo")
@@ -33,6 +34,36 @@ public class InterDownManageController {
             ControllerUtils.returnJsonSuccess(request, response, resultPd,1);
         }else{
             ControllerUtils.returnJsonError(request, response, "查询失败",-1);
+=======
+     */
+    @RequestMapping("/queryDownManageInfo")
+    public void queryDownManageInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PageData pd = new PageData(request);
+        if(pd.isEmpty()){
+            ControllerUtils.returnJsonError(request, response, "参数不能为空",-1);
+
+        }else {
+            String pageNum = (String) pd.get("pageNum");
+            String pageSize = (String) pd.get("pageSize");
+            String direction = (String) pd.get("direction");
+            String order = (String) pd.get("order");
+            PageHelperData pageHelperData = new PageHelperData();
+            pageHelperData.setOrder(order);
+            pageHelperData.setDirection(direction);
+            pageHelperData.setPageNum(Integer.valueOf(pageNum));
+            pageHelperData.setPageSize(Integer.valueOf(pageSize));
+            pd.remove("pageNum");
+            pd.remove("order");
+            pd.remove("direction");
+            pd.remove("pageSize");
+            pageHelperData.setPd(pd);
+            PageData resultPd = interDownManageService.queryDownManageInfo(pageHelperData);
+            if (resultPd.get("success").equals("success")) {
+                ControllerUtils.returnJsonSuccess(request, response, resultPd, 1);
+            } else {
+                ControllerUtils.returnJsonError(request, response, "查询失败", -1);
+            }
+>>>>>>> master
         }
     }
 

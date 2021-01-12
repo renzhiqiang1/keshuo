@@ -26,6 +26,7 @@ public class InterfaceController {
      *
      * @param request
      * @param response
+<<<<<<< HEAD
      * @param pd
      * @throws IOException
      */
@@ -48,6 +49,38 @@ public class InterfaceController {
             ControllerUtils.returnJsonSuccess(request, response, resultPd,1);
         }else{
             ControllerUtils.returnJsonError(request, response, "查询失败",-1);
+=======
+     * @throws IOException
+     */
+    @RequestMapping(value = "/getUpstreamInfo")
+    public void getUpstreamInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PageData pd = new PageData(request);
+        if(pd.isEmpty()){
+            ControllerUtils.returnJsonError(request, response, "参数不能为空",-1);
+        }else {
+            PageData resultPd = interfaceService.getUpstreamInfo(request, response, pd);
+            if (resultPd.get("success").equals("success")) {
+                ControllerUtils.returnJsonSuccess(request, response, resultPd, 1);
+            } else {
+                ControllerUtils.returnJsonError(request, response, "查询失败", -1);
+            }
+        }
+    }
+
+
+    @RequestMapping(value = "/getCallUpstreamInfo")
+    public void getCallUpstreamInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PageData pd = new PageData(request);
+        if(pd.isEmpty()){
+            ControllerUtils.returnJsonError(request, response, "参数不能为空",-1);
+        }else {
+            PageData resultPd = interfaceService.getCallUpstreamInfo(request, response, pd);
+            if (resultPd.get("success").equals("success")) {
+                ControllerUtils.returnJsonSuccess(request, response, resultPd, 1);
+            } else {
+                ControllerUtils.returnJsonError(request, response, "查询失败", -1);
+            }
+>>>>>>> master
         }
     }
 

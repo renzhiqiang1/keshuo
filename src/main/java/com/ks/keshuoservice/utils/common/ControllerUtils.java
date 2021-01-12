@@ -99,7 +99,11 @@ public abstract class ControllerUtils {
 		}
 		return null;
 	}
+<<<<<<< HEAD
 	public static ModelAndView returnJsonSuccess(HttpServletRequest request, HttpServletResponse response, Object result,Integer code)
+=======
+	public static ModelAndView returnJsonSuccess(HttpServletRequest request, HttpServletResponse response,Object result,Integer code)
+>>>>>>> master
 			throws IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
@@ -110,7 +114,11 @@ public abstract class ControllerUtils {
 		response.setHeader("Access-Control-Allow-Credentials","true"); //是否支持cookie跨域
 		TypeUtils.compatibleWithJavaBean=true;
 
+<<<<<<< HEAD
 		RemoteResult jr = new RemoteResult(true,code,result.toString());
+=======
+		RemoteResult jr = new RemoteResult(true,code,"",result);
+>>>>>>> master
 		try {
 			PrintWriter pw = response.getWriter();
 //			pw.write(JSON.toJSONString(jr, new PascalNameFilter()));

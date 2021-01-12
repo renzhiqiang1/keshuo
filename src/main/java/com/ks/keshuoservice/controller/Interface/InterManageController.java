@@ -24,6 +24,7 @@ public class InterManageController {
      * 查询分页信息
      * @param request
      * @param response
+<<<<<<< HEAD
      * @param pageHelperData
      */
     @RequestMapping("/queryManageInfo")
@@ -33,6 +34,35 @@ public class InterManageController {
             ControllerUtils.returnJsonSuccess(request, response, resultPd,1);
         }else{
             ControllerUtils.returnJsonError(request, response, "查询失败",-1);
+=======
+     */
+    @RequestMapping("/queryManageInfo")
+    public void queryManageInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PageData pd = new PageData(request);
+        if(pd.isEmpty()){
+            ControllerUtils.returnJsonError(request, response, "参数不能为空",-1);
+        }else{
+            String pageNum = (String) pd.get("pageNum");
+            String pageSize = (String) pd.get("pageSize");
+            String direction = (String) pd.get("direction");
+            String order = (String) pd.get("order");
+            PageHelperData pageHelperData = new PageHelperData();
+            pageHelperData.setOrder(order);
+            pageHelperData.setDirection(direction);
+            pageHelperData.setPageNum(Integer.valueOf(pageNum));
+            pageHelperData.setPageSize(Integer.valueOf(pageSize));
+            pd.remove("pageNum");
+            pd.remove("order");
+            pd.remove("direction");
+            pd.remove("pageSize");
+            pageHelperData.setPd(pd);
+            PageData resultPd = interManageService.queryManageInfo(pageHelperData);
+            if(resultPd.get("success").equals("success")){
+                ControllerUtils.returnJsonSuccess(request, response, resultPd,1);
+            }else{
+                ControllerUtils.returnJsonError(request, response, "查询失败",-1);
+            }
+>>>>>>> master
         }
     }
 
@@ -71,6 +101,7 @@ public class InterManageController {
     }
 
 
+<<<<<<< HEAD
     /**
      * 批量修改状态 未完成
      * @param request
@@ -88,6 +119,8 @@ public class InterManageController {
         }
     }*/
 
+=======
+>>>>>>> master
 
 
 }
