@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ks.keshuoservice.dao.Interface.InterDownManageDao">
+
+
+   <select id="queryDownManageInfo" parameterType="pd" resultType="TbUpToDownInfoEntity">
+       select info.*,up.upip from tb_uptodowninfo info left join tb_upinfo up on info.upserial= up.serial
+       where 1=1  and info.upserial = #{upserial}
+       <if test="createuser!=null and createuser!=''">
+           and info.createuser like '%'${createuser}'%'
+       </if>
+       <if test="updateuser!=null and updateuser!=''">
+           and info.updateuser like '%${updateuser}%'
+       </if>
+       <if test="startTime!=null and startTime!=''">
+           and info.createtime  <![CDATA[>= ]]>  DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+       </if>
+       <if test="endTime!=null and endTime!=''">
+           and info.createtime  <![CDATA[<= ]]>  DATE_FORMAT(#{endTime},'%Y-%m-%d %H:%i:%S')
+       </if>
+       <if test="startUpdateTime!=null and startUpdateTime!=''">
+           and info.updatetime  <![CDATA[>= ]]>  DATE_FORMAT(#{startUpdateTime},'%Y-%m-%d %H:%i:%S')
+       </if>
+       <if test="endUpdateTime!=null and endUpdateTime!=''">
+           and info.updatetime  <![CDATA[<= ]]>  DATE_FORMAT(#{endUpdateTime},'%Y-%m-%d %H:%i:%S')
+       </if>
+       <if test="downstatus!=null and downstatus!=''">
+           and info.downstatus = #{downstatus}
+       </if>
+       <if test="downip!=null and downip!=''">
+           and info.downip = #{downip}
+       </if>
+       <if test="remark!=null and remark!=''">
+           and info.remark like '%'${remark}'%'
+       </if>
+   </select>
+
+
+    <insert id="saveDownInfo" parameterType="pd">
+        insert into tb_uptodowninfo(
+        serial,upserial,createuser,remark,downip,downstatus
+        ) values (
+        (REPLACE(UUID(),"-",""),#{upserial},#{createuser},#{remark},#{downip},#{downstatus}
+        )
+    </insert>
+
+
+    <update id="updateDownInfo" parameterType="pd">
+        <if test="serial!=null">
+            update tb_uptodowninfo
+            <set>
+                <if test="downstatus!=null">
+                    downstatus ='${downstatus}',
+                </if>
+                <if test="downip!=null">
+                    downip ='${downip}',
+                </if>
+                <if test="remark!=null">
+                    remark ='${remark}',
+                </if>
+                <if test="updateuser!=null">
+                    updateuser ='${updateuser}',
+                </if>
+                updatetime = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s')
+            </set>
+            <where>
+                serial = '${serial}'
+            </where>
+        </if>
+    </update>
+
+</mapper>
+
+
