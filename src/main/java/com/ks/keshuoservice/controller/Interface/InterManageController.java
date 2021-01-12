@@ -24,17 +24,6 @@ public class InterManageController {
      * 查询分页信息
      * @param request
      * @param response
-<<<<<<< HEAD
-     * @param pageHelperData
-     */
-    @RequestMapping("/queryManageInfo")
-    public void queryManageInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody PageHelperData pageHelperData) throws IOException {
-        PageData resultPd = interManageService.queryManageInfo(pageHelperData);
-        if(resultPd.get("success").equals("success")){
-            ControllerUtils.returnJsonSuccess(request, response, resultPd,1);
-        }else{
-            ControllerUtils.returnJsonError(request, response, "查询失败",-1);
-=======
      */
     @RequestMapping("/queryManageInfo")
     public void queryManageInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -62,7 +51,6 @@ public class InterManageController {
             }else{
                 ControllerUtils.returnJsonError(request, response, "查询失败",-1);
             }
->>>>>>> master
         }
     }
 
@@ -101,26 +89,6 @@ public class InterManageController {
     }
 
 
-<<<<<<< HEAD
-    /**
-     * 批量修改状态 未完成
-     * @param request
-     * @param response
-     * @param pd
-     * @throws IOException
-     */
-   /* @RequestMapping("/batchUpdateUpStatusInfo")
-    public void batchUpdateUpStatusInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody PageData pd) throws IOException {
-        PageData resultPd = interManageService.batchUpdateUpStatusInfo(pd);
-        if(resultPd.get("success").equals("success")){
-            ControllerUtils.returnJsonSuccess(request, response, resultPd,1);
-        }else{
-            ControllerUtils.returnJsonError(request, response, "查询失败",-1);
-        }
-    }*/
-
-=======
->>>>>>> master
 
 
 }

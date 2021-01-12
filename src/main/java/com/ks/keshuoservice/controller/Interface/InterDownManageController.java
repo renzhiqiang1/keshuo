@@ -24,17 +24,6 @@ public class InterDownManageController {
      * 查询下游信息分页
      * @param request
      * @param response
-<<<<<<< HEAD
-     * @param pageHelperData
-     */
-    @RequestMapping("/queryDownManageInfo")
-    public void queryDownManageInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody PageHelperData pageHelperData) throws IOException {
-        PageData resultPd = interDownManageService.queryDownManageInfo(pageHelperData);
-        if(resultPd.get("success").equals("success")){
-            ControllerUtils.returnJsonSuccess(request, response, resultPd,1);
-        }else{
-            ControllerUtils.returnJsonError(request, response, "查询失败",-1);
-=======
      */
     @RequestMapping("/queryDownManageInfo")
     public void queryDownManageInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -63,7 +52,6 @@ public class InterDownManageController {
             } else {
                 ControllerUtils.returnJsonError(request, response, "查询失败", -1);
             }
->>>>>>> master
         }
     }
 

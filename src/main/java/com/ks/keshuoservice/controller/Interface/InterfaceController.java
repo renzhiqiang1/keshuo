@@ -26,30 +26,6 @@ public class InterfaceController {
      *
      * @param request
      * @param response
-<<<<<<< HEAD
-     * @param pd
-     * @throws IOException
-     */
-    @RequestMapping(value = "/getUpstreamInfo", method = {RequestMethod.GET, RequestMethod.POST})
-    public void getUpstreamInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody PageData pd) throws IOException {
-        PageData resultPd = interfaceService.getUpstreamInfo(request, response, pd);
-        if(resultPd.get("success").equals("success")){
-            ControllerUtils.returnJsonSuccess(request, response, resultPd,1);
-        }else{
-            ControllerUtils.returnJsonError(request, response, "查询失败",-1);
-        }
-
-    }
-
-
-    @RequestMapping(value = "/getCallUpstreamInfo", method = {RequestMethod.GET, RequestMethod.POST})
-    public void getCallUpstreamInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody PageData pd) throws IOException {
-        PageData resultPd = interfaceService.getCallUpstreamInfo(request, response, pd);
-        if(resultPd.get("success").equals("success")){
-            ControllerUtils.returnJsonSuccess(request, response, resultPd,1);
-        }else{
-            ControllerUtils.returnJsonError(request, response, "查询失败",-1);
-=======
      * @throws IOException
      */
     @RequestMapping(value = "/getUpstreamInfo")
@@ -80,7 +56,6 @@ public class InterfaceController {
             } else {
                 ControllerUtils.returnJsonError(request, response, "查询失败", -1);
             }
->>>>>>> master
         }
     }
 
