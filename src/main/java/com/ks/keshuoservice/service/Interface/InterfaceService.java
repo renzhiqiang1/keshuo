@@ -27,10 +27,6 @@ public class InterfaceService {
 
     public PageData getUpstreamInfo(HttpServletRequest request, HttpServletResponse response, PageData pd){
         PageData resultPd = new PageData();
-        pd.get("");
-        pd.get("");
-        pd.get("");
-        pd.get("");
         String success = "success";
         String message = "获取数据成功";
         String resultStr = "";
@@ -55,11 +51,14 @@ public class InterfaceService {
                                 if(StringUtils.isNotBlank(upIp)){
                                     RestTemplate restTemplate = new RestTemplate();
                                     restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-                                    PageData json = new PageData();
-                                    json.put("","");
-                                    json.put("","");
-                                    json.put("","");
-                                    json.put("","");
+//                                    PageData json = new PageData();
+                                    JSONObject json = new JSONObject();
+                                    String channel = tbUpInfoEntity.getChannel();
+                                    String adid = tbUpInfoEntity.getAdid();
+                                    String idfa = tbUpInfoEntity.getIdfa();
+                                    json.put("channel",channel);
+                                    json.put("adid",adid);
+                                    json.put("idfa",idfa);
                                     resultStr = restTemplate.postForObject(upIp, json, String.class);
                                     if(StringUtils.isNotBlank(resultStr)){
                                         //结果数据存库
@@ -102,20 +101,19 @@ public class InterfaceService {
 
     public PageData getCallUpstreamInfo(HttpServletRequest request, HttpServletResponse response, PageData pd){
         PageData resultPd = new PageData();
-        pd.get("");
-        pd.get("");
-        pd.get("");
-        pd.get("");
+        String channel = (String) pd.get("channel");
+        String adid = (String) pd.get("adid");
+        String idfa = (String) pd.get("idfa");
+        String url = (String) pd.get("url");
         String success = "success";
         String message = "获取数据成功";
         String resultStr = "";
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-//        JSONObject json = new JSONObject();
-        PageData json = new PageData();
-        json.put("name","ceshi");
-        json.put("password","123456");
-        String url = "http://192.168.3.131:1101/permission/accountLogin";
+        JSONObject json = new JSONObject();
+        json.put("channel",channel);
+        json.put("adid",adid);
+        json.put("idfa",idfa);
         resultStr = restTemplate.postForObject(url, json, String.class);
         resultPd.put("result",resultStr);
         resultPd.put("success",success);
