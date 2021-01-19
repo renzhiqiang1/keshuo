@@ -5,7 +5,10 @@
 
    <select id="queryDownManageInfo" parameterType="pd" resultType="TbUpToDownInfoEntity">
        select info.*,up.upip from tb_uptodowninfo info left join tb_upinfo up on info.upserial= up.serial
-       where 1=1  and info.upserial = #{upserial}
+       where 1=1
+       <if test="upserial!=null and upserial!=''">
+           and info.upserial = #{upserial}
+       </if>
        <if test="createuser!=null and createuser!=''">
            and info.createuser like '%'${createuser}'%'
        </if>
