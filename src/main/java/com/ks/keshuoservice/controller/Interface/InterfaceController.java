@@ -39,12 +39,18 @@ public class InterfaceController {
             if (resultPd.get("success").equals("success")) {
                 ControllerUtils.returnJsonSuccess(request, response, resultPd, 1);
             } else {
-                ControllerUtils.returnJsonError(request, response, "查询失败", -1);
+                ControllerUtils.returnJsonError(request, response, resultPd.get("message"), -1);
             }
         }
     }
 
 
+    /**
+     * 调用上游接口
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @RequestMapping(value = "/getCallUpstreamInfo")
     public void getCallUpstreamInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PageData pd = new PageData(request);

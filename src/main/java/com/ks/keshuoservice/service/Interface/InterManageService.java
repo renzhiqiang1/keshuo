@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,5 +64,34 @@ public class InterManageService {
 
 
 
+    public PageData batchUpdateUpInfo(PageData pd){
+        PageData resultPd = new PageData();
+        String success = "success";
+        String message = "修改成功";
+
+        String remark = (String) pd.get("remark");
+        String updateuser = (String) pd.get("updateuser");
+        String status = (String) pd.get("status");
+        List<HashMap<String, Object>> listMap = (List<HashMap<String, Object>>) pd.get("list");
+        if(listMap!=null && listMap.size()>0){
+            for (HashMap<String, Object> m : listMap) {
+                m.put("remark",remark);
+                m.put("updateuser",updateuser);
+                m.put("status",status);
+                interManageDao.batchUpdateUpInfo(m);
+            }
+
+            for (HashMap<String, Object> m : listMap) {
+                String serial = (String) m.get("serial");
+                interManageDao.updateUpToDownUpStatus(serial,status);
+            }
+        }else{
+            success = "error";
+            message = "请选择要修改的信息";
+        }
+        resultPd.put("success", success);
+        resultPd.put("message", message);
+        return resultPd;
+    }
 
 }

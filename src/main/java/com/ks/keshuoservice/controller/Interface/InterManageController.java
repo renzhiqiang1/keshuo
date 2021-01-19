@@ -90,6 +90,21 @@ public class InterManageController {
     }
 
 
-
+    /**
+     * 批量修改上游接口信息
+     * @param request
+     * @param response
+     * @param pd
+     * @throws IOException
+     */
+    @RequestMapping("/batchUpdateUpInfo")
+    public void batchUpdateUpInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody PageData pd) throws IOException {
+        PageData resultPd = interManageService.batchUpdateUpInfo(pd);
+        if(resultPd.get("success").equals("success")){
+            ControllerUtils.returnJsonSuccess(request, response, resultPd,1);
+        }else{
+            ControllerUtils.returnJsonError(request, response, "修改失败",-1);
+        }
+    }
 
 }

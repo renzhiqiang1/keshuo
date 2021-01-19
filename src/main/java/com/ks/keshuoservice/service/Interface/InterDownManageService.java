@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -57,6 +58,29 @@ public class InterDownManageService {
 
 
 
+    public PageData batchUpdateDownInfo(PageData pd){
+        PageData resultPd = new PageData();
+        String success = "success";
+        String message = "修改成功";
+        String remark = (String) pd.get("remark");
+        String updateuser = (String) pd.get("updateuser");
+        String downstatus = (String) pd.get("downstatus");
+        List<HashMap<String, Object>> listMap = (List<HashMap<String, Object>>) pd.get("list");
+        if(listMap!=null && listMap.size()>0){
+            for (HashMap<String, Object> m : listMap) {
+                m.put("remark",remark);
+                m.put("updateuser",updateuser);
+                m.put("downstatus",downstatus);
+                interDownManageDao.batchUpdateDownInfo(m);
+            }
 
+        }else{
+            success = "error";
+            message = "请选择要修改的信息";
+        }
+        resultPd.put("success", success);
+        resultPd.put("message", message);
+        return resultPd;
+    }
 
 }

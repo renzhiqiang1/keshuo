@@ -19,6 +19,15 @@ public class TbUpToDownInfoEntity implements Serializable {
     private String downstatus;
     private String upstatus;
     private String upip;
+    private String percent;
+
+    public String getPercent() {
+        return percent;
+    }
+
+    public void setPercent(String percent) {
+        this.percent = percent;
+    }
 
     public String getUpip() {
         return upip;

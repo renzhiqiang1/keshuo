@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -18,5 +19,6 @@ public interface InterDownManageDao {
 
     void updateDownInfo(PageData pd);
 
+    void batchUpdateDownInfo(HashMap<String, Object> map);
 
 }

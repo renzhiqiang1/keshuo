@@ -89,6 +89,28 @@
         </if>
     </update>
 
+
+
+    <update id="batchUpdateUpInfo" parameterType="java.util.List">
+                    update tb_upinfo
+                    <set>
+                        <if test="status!=null">
+                            status ='${status}',
+                        </if>
+                        <if test="remark!=null">
+                            remark ='${remark}',
+                        </if>
+                        <if test="updateuser!=null">
+                            updateuser ='${updateuser}',
+                        </if>
+                        updatetime = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s')
+                    </set>
+                    <where>
+                        serial = '${serial}'
+                    </where>
+    </update>
+
+
 </mapper>
 
 

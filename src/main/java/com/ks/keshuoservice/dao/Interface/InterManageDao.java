@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -19,5 +20,7 @@ public interface InterManageDao {
 
     @Update("update tb_uptodowninfo set upstatus = #{upstatus} where serial = #{serial}")
     void updateUpToDownUpStatus(@Param("serial") String serial, @Param("upstatus") String upstatus);
+
+    void batchUpdateUpInfo(HashMap<String,Object> map);
 
 }

@@ -89,4 +89,23 @@ public class InterDownManageController {
     }
 
 
+    /**
+     * 批量修改下游接口信息
+     * @param request
+     * @param response
+     * @param pd
+     * @throws IOException
+     */
+    @RequestMapping("/batchUpdateDownInfo")
+    public void batchUpdateDownInfo(HttpServletRequest request, HttpServletResponse response, @RequestBody PageData pd) throws IOException {
+        PageData resultPd = interDownManageService.batchUpdateDownInfo(pd);
+        if(resultPd.get("success").equals("success")){
+            ControllerUtils.returnJsonSuccess(request, response, resultPd,1);
+        }else{
+            ControllerUtils.returnJsonError(request, response, "修改失败",-1);
+        }
+    }
+
+
+
 }

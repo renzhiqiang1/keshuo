@@ -38,9 +38,9 @@
 
     <insert id="saveDownInfo" parameterType="pd">
         insert into tb_uptodowninfo(
-        serial,upserial,createuser,remark,downip,downstatus
+        serial,upserial,createuser,remark,downip,downstatus,percent
         ) values (
-        (REPLACE(UUID(),"-",""),#{upserial},#{createuser},#{remark},#{downip},#{downstatus}
+        REPLACE(UUID(),"-",""),#{upserial},#{createuser},#{remark},#{downip},#{downstatus},#{percent}
         )
     </insert>
 
@@ -61,6 +61,9 @@
                 <if test="updateuser!=null">
                     updateuser ='${updateuser}',
                 </if>
+                <if test="percent!=null">
+                    percent ='${percent}',
+                </if>
                 updatetime = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s')
             </set>
             <where>
@@ -68,6 +71,24 @@
             </where>
         </if>
     </update>
+
+    <update id="batchUpdateDownInfo" parameterType="java.util.HashMap">
+                update tb_uptodowninfo
+            <set>
+                <if test="downstatus!=null">
+                    downstatus ='${downstatus}',
+                </if>
+                <if test="remark!=null">
+                    remark ='${remark}',
+                </if>
+                <if test="updateuser!=null">
+                    updateuser ='${updateuser}',
+                </if>
+                updatetime = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s')
+            </set>
+            <where>  serial = '${serial}'</where>
+    </update>
+
 
 </mapper>
 
