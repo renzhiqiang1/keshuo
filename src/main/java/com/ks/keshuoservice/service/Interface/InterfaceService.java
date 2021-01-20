@@ -76,8 +76,8 @@ public class InterfaceService {
                                         pd.put("aff_pub","lw2446");
                                         pd.put("idfa","44A16F57-814B-481A-9FBE-72AC82B3F58B");
                                         pd.put("ip",ip);
-                                        pd.put("aff_sub2",aff_sub2);
                                     }
+                                    pd.put("aff_sub2",aff_sub2);
                                     resultStr = HttpDeal.doGet(upIp,pd);
                                     System.out.println("result:"+resultStr);
                                     if(StringUtils.isNotBlank(resultStr)){
