@@ -10,6 +10,13 @@
     </insert>
 
 
+    <insert id="saveCallBackInfo" parameterType="pd">
+          insert into  tb_callbackinfo
+          (serial,callback)
+          values (REPLACE(UUID(),"-",""),#{callback})
+    </insert>
+
+
 </mapper>
 
 

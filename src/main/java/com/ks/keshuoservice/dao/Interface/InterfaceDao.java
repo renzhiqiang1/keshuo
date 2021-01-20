@@ -25,4 +25,6 @@ public interface InterfaceDao {
 
     void saveResultInfo(PageData pd);
 
+    void saveCallBackInfo(PageData pd);
+
 }

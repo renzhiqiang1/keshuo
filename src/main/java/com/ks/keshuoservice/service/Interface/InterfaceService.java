@@ -9,6 +9,7 @@ import com.ks.keshuoservice.utils.common.HttpDeal;
 import com.ks.keshuoservice.utils.common.PageData;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -28,14 +29,23 @@ public class InterfaceService {
 
     @Autowired
     private InterfaceDao interfaceDao;
+    @Value("${aff_sub2}")
+    private String aff_sub2;
+    @Value("${ip}")
+    private String ip;
+    @Value("${ceshi}")
+    private String ceshi;
 
     public PageData getUpstreamInfo(HttpServletRequest request, HttpServletResponse response, PageData pd){
         PageData resultPd = new PageData();
         String success = "success";
         String message = "获取数据成功";
         JSONObject resultJson = new JSONObject();
+        String resultStr = "";
         String ip = request.getRemoteAddr();
-//        String ip = "127.0.0.1";
+        if(ceshi.equals("1")){
+            ip = "127.0.0.1";
+        }
         String serial = (String) pd.get("id");
 //        String serial = "1";
         if(StringUtils.isNotBlank(ip)){
@@ -58,10 +68,19 @@ public class InterfaceService {
                                     RestTemplate restTemplate = new RestTemplate();
                                     restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
                                     System.out.println("upIp:"+upIp+"json:"+pd);
-                                    String resultStr = HttpDeal.doGet(upIp,pd);
+                                    if(ceshi.equals("1")){
+                                        upIp = "https://threewater.hotrk0.com/offer";
+                                        pd.put("offer_id","2446");
+                                        pd.put("aff_id","82");
+                                        pd.put("aff_sub","aass");
+                                        pd.put("aff_pub","lw2446");
+                                        pd.put("idfa","44A16F57-814B-481A-9FBE-72AC82B3F58B");
+                                        pd.put("ip",ip);
+                                        pd.put("aff_sub2",aff_sub2);
+                                    }
+                                    resultStr = HttpDeal.doGet(upIp,pd);
                                     System.out.println("result:"+resultStr);
                                     if(StringUtils.isNotBlank(resultStr)){
-                                        resultJson = JSONObject.parseObject(resultStr);
                                         //结果数据存库
                                         PageData savePd = new PageData();
                                         savePd.put("upserial",serial);
@@ -104,11 +123,13 @@ public class InterfaceService {
             }
 
         }
-        resultPd.put("result",resultJson);
+        resultPd.put("result",resultStr);
         resultPd.put("success",success);
         resultPd.put("message",message);
         return resultPd;
     }
+
+
 
 
 
@@ -128,6 +149,14 @@ public class InterfaceService {
         return resultPd;
     }
 
+
+    public void saveCallBackInfo(PageData pd){
+        if(!pd.isEmpty()){
+            PageData savePd = new PageData();
+            savePd.put("callback",pd.toString());
+            interfaceDao.saveCallBackInfo(savePd);
+        }
+    }
 
 
 }

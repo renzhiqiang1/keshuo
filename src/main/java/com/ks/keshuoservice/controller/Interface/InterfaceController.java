@@ -67,6 +67,18 @@ public class InterfaceController {
     }
 
 
+    /**
+     * callBack 进行数据保存
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping(value = "/saveCallBackInfo")
+    public void saveCallBackInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PageData pd = new PageData(request);
+        interfaceService.saveCallBackInfo(pd);
+    }
+
 
 
 }
