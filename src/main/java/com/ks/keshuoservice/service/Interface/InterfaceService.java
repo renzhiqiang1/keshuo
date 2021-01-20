@@ -34,8 +34,8 @@ public class InterfaceService {
         String success = "success";
         String message = "获取数据成功";
         JSONObject resultJson = new JSONObject();
-//        String ip = request.getRemoteAddr();
-        String ip = "127.0.0.1";
+        String ip = request.getRemoteAddr();
+//        String ip = "127.0.0.1";
         String serial = (String) pd.get("id");
 //        String serial = "1";
         if(StringUtils.isNotBlank(ip)){
