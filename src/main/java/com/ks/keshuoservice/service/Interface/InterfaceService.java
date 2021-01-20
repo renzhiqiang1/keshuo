@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ks.keshuoservice.dao.Interface.InterfaceDao;
 import com.ks.keshuoservice.entity.Interface.TbUpInfoEntity;
 import com.ks.keshuoservice.entity.Interface.TbUpToDownInfoEntity;
+import com.ks.keshuoservice.utils.common.HttpDeal;
 import com.ks.keshuoservice.utils.common.PageData;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 
 @Service
@@ -31,12 +34,12 @@ public class InterfaceService {
         String success = "success";
         String message = "获取数据成功";
         JSONObject resultJson = new JSONObject();
-        String ip = request.getRemoteAddr();
-//        String ip = "127.0.0.1";
+//        String ip = request.getRemoteAddr();
+        String ip = "127.0.0.1";
         String serial = (String) pd.get("id");
 //        String serial = "1";
         if(StringUtils.isNotBlank(ip)){
-            JSONObject json = JSONObject.parseObject(JSON.toJSONString(pd));
+//            JSONObject json = JSONObject.parseObject(JSON.toJSONString(pd));
             //查询数据库判断是否有权限访问
             List<TbUpToDownInfoEntity> downList = interfaceDao.queryuptoDownInfo(ip,serial);
             if(downList!=null && downList.size()>0){
@@ -54,7 +57,9 @@ public class InterfaceService {
                                 if(StringUtils.isNotBlank(upIp)){
                                     RestTemplate restTemplate = new RestTemplate();
                                     restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-                                    String resultStr = restTemplate.postForObject(upIp, json, String.class);
+                                    System.out.println("upIp:"+upIp+"json:"+pd);
+                                    String resultStr = HttpDeal.doGet(upIp,pd);
+                                    System.out.println("result:"+resultStr);
                                     if(StringUtils.isNotBlank(resultStr)){
                                         resultJson = JSONObject.parseObject(resultStr);
                                         //结果数据存库
@@ -115,13 +120,9 @@ public class InterfaceService {
         String message = "获取数据成功";
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
-        JSONObject json = JSONObject.parseObject(JSON.toJSONString(pd));
-        String resultStr = restTemplate.postForObject(url, json, String.class);
-        JSONObject resultJson = new JSONObject();
-        if(StringUtils.isNotBlank(resultStr)){
-            resultJson = JSONObject.parseObject(resultStr);
-        }
-        resultPd.put("result",resultJson);
+//        String resultStr = restTemplate.postForObject(url, json, String.class);
+        String resultStr = HttpDeal.doGet(url,pd);
+        resultPd.put("result",resultStr);
         resultPd.put("success",success);
         resultPd.put("message",message);
         return resultPd;
