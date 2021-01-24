@@ -21,6 +21,10 @@
         <typeAlias alias="TbUpInfoEntity" type="com.ks.keshuoservice.entity.Interface.TbUpInfoEntity" />
         <typeAlias alias="TbResultInfoEntity" type="com.ks.keshuoservice.entity.Interface.TbResultInfoEntity" />
         <typeAlias alias="pd" type="com.ks.keshuoservice.utils.common.PageData" />
+        <typeAlias alias="TbUpManangeInfoEntity" type="com.ks.keshuoservice.entity.Redirect.TbUpManangeInfoEntity" />
+        <typeAlias alias="TbUpManangeParamInfoEntity" type="com.ks.keshuoservice.entity.Redirect.TbUpManangeParamInfoEntity" />
+        <typeAlias alias="TbDownManageInfoEntity" type="com.ks.keshuoservice.entity.Redirect.TbDownManageInfoEntity" />
+        <typeAlias alias="TbMappingInfoEntity" type="com.ks.keshuoservice.entity.Redirect.TbMappingInfoEntity" />
     </typeAliases>
 
 

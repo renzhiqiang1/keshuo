@@ -22,3 +22,5 @@ logging:
 ceshi: 1
 aff_sub2: http://ks.letianaso.com/api/interface/saveCallBackInfo
 ip: 223.104.39.9
+
+redirectUrl: http://ks.letianaso.com/inter/redirect
