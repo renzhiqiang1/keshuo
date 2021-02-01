@@ -18,7 +18,7 @@
            and info.createuser = #{createuser}
        </if>
        <if test="remark!=null and remark!=''">
-           and info.remark like '%'${remark}'%'
+           and info.remark like '%${remark}%'
        </if>
        <if test="startTime!=null and startTime!=''">
            and info.createtime  <![CDATA[>= ]]>  DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')

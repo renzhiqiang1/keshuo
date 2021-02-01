@@ -10,7 +10,7 @@
            and info.upserial = #{upserial}
        </if>
        <if test="createuser!=null and createuser!=''">
-           and info.createuser like '%'${createuser}'%'
+           and info.createuser like '%${createuser}%'
        </if>
        <if test="updateuser!=null and updateuser!=''">
            and info.updateuser like '%${updateuser}%'
@@ -34,7 +34,7 @@
            and info.downip = #{downip}
        </if>
        <if test="remark!=null and remark!=''">
-           and info.remark like '%'${remark}'%'
+           and info.remark like '%${remark}%'
        </if>
    </select>
 
