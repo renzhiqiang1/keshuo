@@ -43,7 +43,7 @@
         insert into tb_uptodowninfo(
         serial,upserial,createuser,remark,downip,downstatus,percent
         ) values (
-        REPLACE(UUID(),"-",""),#{upserial},#{createuser},#{remark},#{downip},#{downstatus},#{percent}
+        UUID_SHORT(),#{upserial},#{createuser},#{remark},#{downip},#{downstatus},#{percent}
         )
     </insert>
 

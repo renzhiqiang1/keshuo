@@ -1,5 +1,6 @@
 package com.ks.keshuoservice.service.Redirect;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ks.keshuoservice.dao.Redirect.RedirectMappingDao;
@@ -12,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -27,6 +29,15 @@ public class RedirectInterService {
 
     public String redirect(PageData pd) throws UnsupportedEncodingException {
         String url = "";
+        if(!pd.isEmpty()){
+            for (Object map : pd.entrySet()){
+                String key = (String) ((Map.Entry)map).getKey();
+                String value = (String) ((Map.Entry)map).getValue();
+                if(!StringUtils.isEmpty(value) && value.contains("{")){
+                    pd.put(key,"");
+                }
+            }
+        }
         String serial = (String) pd.get("private");
         List<TbMappingInfoEntity> list = redirectMappingDao.queryMappingBySerial(serial);
         if (list != null && list.size() > 0) {

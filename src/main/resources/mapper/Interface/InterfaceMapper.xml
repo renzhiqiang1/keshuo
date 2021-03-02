@@ -6,14 +6,14 @@
     <insert id="saveResultInfo" parameterType="pd">
           insert into  tb_resultinfo
           (serial,upserial,result,downip)
-          values (REPLACE(UUID(),"-",""),#{upserial},#{result},#{downip})
+          values (UUID_SHORT(),#{upserial},#{result},#{downip})
     </insert>
 
 
     <insert id="saveCallBackInfo" parameterType="pd">
           insert into  tb_callbackinfo
           (serial,callback)
-          values (REPLACE(UUID(),"-",""),#{callback})
+          values (UUID_SHORT(),#{callback})
     </insert>
 
 

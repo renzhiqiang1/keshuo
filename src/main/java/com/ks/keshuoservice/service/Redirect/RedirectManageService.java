@@ -7,7 +7,6 @@ import com.ks.keshuoservice.entity.Redirect.TbUpManangeInfoEntity;
 import com.ks.keshuoservice.entity.Redirect.TbUpManangeParamInfoEntity;
 import com.ks.keshuoservice.utils.common.PageData;
 import com.ks.keshuoservice.utils.common.PageHelperData;
-import com.ks.keshuoservice.utils.common.UuidUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,7 +62,7 @@ public class RedirectManageService {
         String success = "success";
         String message = "保存成功";
         if(!pd.isEmpty()){
-            String serial = UuidUtil.get32UUID();
+            String serial = redirectManageDao.getUUID();
             pd.put("serial",serial);
             redirectManageDao.saveUpManageInfo(pd);
             List<HashMap<String, Object>> listMap = (List<HashMap<String, Object>>) pd.get("list");
@@ -153,7 +152,7 @@ public class RedirectManageService {
                                     sb.append(url);
                                     Boolean wHBool = url.contains("?");
                                     Boolean dLBool = url.contains("&");
-                                    String privateSerial = UuidUtil.get32UUID();
+                                    String privateSerial = redirectManageDao.getUUID();
                                     if(list!=null && list.size()>0){
                                         if(wHBool && dLBool){
                                             for(TbUpManangeParamInfoEntity p:list){

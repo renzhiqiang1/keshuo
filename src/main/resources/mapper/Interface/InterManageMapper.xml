@@ -48,7 +48,7 @@
         insert into tb_upinfo(
         serial,upip,status,createuser,remark,channel,adid,idfa,ip
         ) values (
-        REPLACE(UUID(),"-",""),#{upip},#{status},#{createuser},#{remark},#{channel},#{adid},#{idfa},#{ip}
+        UUID_SHORT(),#{upip},#{status},#{createuser},#{remark},#{channel},#{adid},#{idfa},#{ip}
         )
     </insert>
 

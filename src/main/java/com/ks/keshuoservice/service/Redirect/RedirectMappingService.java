@@ -2,21 +2,15 @@ package com.ks.keshuoservice.service.Redirect;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ks.keshuoservice.dao.Redirect.RedirectManageDao;
 import com.ks.keshuoservice.dao.Redirect.RedirectMappingDao;
 import com.ks.keshuoservice.entity.Redirect.TbMappingInfoEntity;
-import com.ks.keshuoservice.entity.Redirect.TbUpManangeInfoEntity;
-import com.ks.keshuoservice.entity.Redirect.TbUpManangeParamInfoEntity;
 import com.ks.keshuoservice.utils.common.PageData;
 import com.ks.keshuoservice.utils.common.PageHelperData;
-import com.ks.keshuoservice.utils.common.UuidUtil;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

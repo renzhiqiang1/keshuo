@@ -15,6 +15,8 @@ import java.util.List;
 @Repository
 public interface RedirectMappingDao {
 
+    @Select("select UUID_SHORT() ")
+    String getUUID();
 
     List<TbMappingInfoEntity> queryMappingInfo(PageData pd);
 

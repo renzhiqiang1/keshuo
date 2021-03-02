@@ -43,7 +43,7 @@
         insert into tb_downmanageinfo(
         serial,name,createuser,remark,status,percent
         ) values (
-        REPLACE(UUID(),"-",""),#{name},#{createuser},#{remark},#{status},#{percent}
+        UUID_SHORT(),#{name},#{createuser},#{remark},#{status},#{percent}
         )
     </insert>
 
