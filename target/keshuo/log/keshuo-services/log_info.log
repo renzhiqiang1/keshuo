@@ -1,0 +1,50 @@
+2021-03-03 01:11:20.247 [main] INFO  com.ks.keshuoservice.KeShuoServiceApplication - Starting KeShuoServiceApplication v0.0.1-SNAPSHOT on SD-20201009ITAW with PID 23012 (E:\ZHZF\SZ-PROJECT\code\keshuo-service\target\keshuo-service.jar started by Administrator in E:\ZHZF\SZ-PROJECT\code\keshuo-service\target)
+2021-03-03 01:11:20.315 [main] INFO  com.ks.keshuoservice.KeShuoServiceApplication - The following profiles are active: prod
+2021-03-03 01:11:22.961 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-03-03 01:11:23.030 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36ms. Found 0 JPA repository interfaces.
+2021-03-03 01:11:24.214 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-03-03 01:11:27.109 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (http)
+2021-03-03 01:11:27.147 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8888"]
+2021-03-03 01:11:27.150 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-03-03 01:11:27.152 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.30]
+2021-03-03 01:11:27.529 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-03-03 01:11:27.530 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 7026 ms
+2021-03-03 01:11:28.339 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-03-03 01:11:31.306 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-03-03 01:11:31.555 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-03-03 01:11:31.903 [main] INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.4.10.Final}
+2021-03-03 01:11:32.340 [main] INFO  org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-03-03 01:11:32.728 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2021-03-03 01:11:33.523 [main] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-03-03 01:11:33.563 [main] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-03-03 01:11:35.626 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService
+2021-03-03 01:11:35.631 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'getAsyncExecutor'
+2021-03-03 01:11:35.719 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-03-03 01:11:36.772 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler - Initializing ExecutorService 'taskScheduler'
+2021-03-03 01:11:36.838 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2021-03-03 01:11:37.194 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2021-03-03 01:11:37.304 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2021-03-03 01:11:37.941 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: batchUpdateDownInfoUsingGET_1
+2021-03-03 01:11:37.942 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: batchUpdateDownInfoUsingHEAD_1
+2021-03-03 01:11:37.967 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: batchUpdateDownInfoUsingPOST_1
+2021-03-03 01:11:37.970 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: batchUpdateDownInfoUsingPUT_1
+2021-03-03 01:11:37.978 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: batchUpdateDownInfoUsingPATCH_1
+2021-03-03 01:11:37.990 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: batchUpdateDownInfoUsingDELETE_1
+2021-03-03 01:11:37.995 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: batchUpdateDownInfoUsingOPTIONS_1
+2021-03-03 01:11:37.999 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: batchUpdateDownInfoUsingTRACE_1
+2021-03-03 01:11:38.003 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: queryDownManageInfoUsingGET_1
+2021-03-03 01:11:38.010 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: queryDownManageInfoUsingHEAD_1
+2021-03-03 01:11:38.014 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: queryDownManageInfoUsingPOST_1
+2021-03-03 01:11:38.019 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: queryDownManageInfoUsingPUT_1
+2021-03-03 01:11:38.024 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: queryDownManageInfoUsingPATCH_1
+2021-03-03 01:11:38.026 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: queryDownManageInfoUsingDELETE_1
+2021-03-03 01:11:38.033 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: queryDownManageInfoUsingOPTIONS_1
+2021-03-03 01:11:38.034 [main] INFO  s.d.s.w.r.operation.CachingOperationNameGenerator - Generating unique operation named: queryDownManageInfoUsingTRACE_1
+2021-03-03 01:11:38.199 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8888"]
+2021-03-03 01:11:38.318 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (http) with context path ''
+2021-03-03 01:11:38.336 [main] INFO  com.ks.keshuoservice.KeShuoServiceApplication - Started KeShuoServiceApplication in 19.723 seconds (JVM running for 21.239)
+2021-03-03 01:11:43.797 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskScheduler - Shutting down ExecutorService 'taskScheduler'
+2021-03-03 01:11:43.803 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'getAsyncExecutor'
+2021-03-03 01:11:43.818 [SpringContextShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-03-03 01:11:43.832 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-03-03 01:11:43.867 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

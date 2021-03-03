@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ks.keshuoservice.dao.Redirect.RedirectDownManageDao">
+
+
+   <select id="queryDownManageInfo" parameterType="pd" resultType="TbDownManageInfoEntity">
+       select info.* from tb_downmanageinfo info
+       where 1=1
+       <if test="name!=null and name!=''">
+           and info.name = like '%${name}%'
+       </if>
+       <if test="createuser!=null and createuser!=''">
+           and info.createuser like '%${createuser}%'
+       </if>
+       <if test="updateuser!=null and updateuser!=''">
+           and info.updateuser like '%${updateuser}%'
+       </if>
+       <if test="startTime!=null and startTime!=''">
+           and info.createtime  <![CDATA[>= ]]>  DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+       </if>
+       <if test="endTime!=null and endTime!=''">
+           and info.createtime  <![CDATA[<= ]]>  DATE_FORMAT(#{endTime},'%Y-%m-%d %H:%i:%S')
+       </if>
+       <if test="startUpdateTime!=null and startUpdateTime!=''">
+           and info.updatetime  <![CDATA[>= ]]>  DATE_FORMAT(#{startUpdateTime},'%Y-%m-%d %H:%i:%S')
+       </if>
+       <if test="endUpdateTime!=null and endUpdateTime!=''">
+           and info.updatetime  <![CDATA[<= ]]>  DATE_FORMAT(#{endUpdateTime},'%Y-%m-%d %H:%i:%S')
+       </if>
+       <if test="status!=null and status!=''">
+           and info.status = #{status}
+       </if>
+       <if test="remark!=null and remark!=''">
+           and info.remark like '%${remark}%'
+       </if>
+       <if test="percent!=null and percent!=''">
+           and info.percent = #{percent}
+       </if>
+   </select>
+
+
+    <insert id="saveDownManageInfo" parameterType="pd">
+        insert into tb_downmanageinfo(
+        serial,name,createuser,remark,status,percent
+        ) values (
+        UUID_SHORT(),#{name},#{createuser},#{remark},#{status},#{percent}
+        )
+    </insert>
+
+
+    <update id="updateDownManageInfo" parameterType="pd">
+        <if test="serial!=null">
+            update tb_downmanageinfo
+            <set>
+                <if test="status!=null">
+                    status ='${status}',
+                </if>
+                <if test="remark!=null">
+                    remark ='${remark}',
+                </if>
+                <if test="updateuser!=null">
+                    updateuser ='${updateuser}',
+                </if>
+                <if test="percent!=null">
+                    percent ='${percent}',
+                </if>
+                <if test="name!=null">
+                    name ='${name}',
+                </if>
+                updatetime = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s')
+            </set>
+            <where>
+                serial = '${serial}'
+            </where>
+        </if>
+    </update>
+
+    <update id="batchUpdateDownManageInfo" parameterType="java.util.HashMap">
+                update tb_downmanageinfo
+            <set>
+                <if test="status!=null">
+                    status ='${status}',
+                </if>
+                <if test="remark!=null">
+                    remark ='${remark}',
+                </if>
+                <if test="updateuser!=null">
+                    updateuser ='${updateuser}',
+                </if>
+                updatetime = DATE_FORMAT(NOW(),'%Y-%m-%d %H:%m:%s')
+            </set>
+            <where>  serial = '${serial}'</where>
+    </update>
+
+
+</mapper>
+
+
