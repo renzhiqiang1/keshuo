@@ -25,6 +25,7 @@
         <typeAlias alias="TbUpManangeParamInfoEntity" type="com.ks.keshuoservice.entity.Redirect.TbUpManangeParamInfoEntity" />
         <typeAlias alias="TbDownManageInfoEntity" type="com.ks.keshuoservice.entity.Redirect.TbDownManageInfoEntity" />
         <typeAlias alias="TbMappingInfoEntity" type="com.ks.keshuoservice.entity.Redirect.TbMappingInfoEntity" />
+        <typeAlias alias="TbDownMappingInfoEntity" type="com.ks.keshuoservice.entity.Redirect.TbDownMappingInfoEntity" />
     </typeAliases>
 
 

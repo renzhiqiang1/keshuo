@@ -3,10 +3,9 @@ package com.ks.keshuoservice.service.Redirect;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ks.keshuoservice.dao.Redirect.RedirectManageDao;
 import com.ks.keshuoservice.dao.Redirect.RedirectMappingDao;
-import com.ks.keshuoservice.entity.Redirect.TbDownManageInfoEntity;
-import com.ks.keshuoservice.entity.Redirect.TbMappingInfoEntity;
-import com.ks.keshuoservice.entity.Redirect.TbUpManangeInfoEntity;
+import com.ks.keshuoservice.entity.Redirect.*;
 import com.ks.keshuoservice.utils.common.PageData;
 import com.ks.keshuoservice.utils.common.PageHelperData;
 import org.slf4j.Logger;
@@ -26,6 +25,8 @@ public class RedirectInterService {
 
     @Autowired
     private RedirectMappingDao redirectMappingDao;
+    @Autowired
+    private RedirectManageDao redirectManageDao;
 
     public String redirect(PageData pd) throws UnsupportedEncodingException {
         String url = "";
@@ -39,29 +40,73 @@ public class RedirectInterService {
             }
         }
         String serial = (String) pd.get("private");
-        List<TbMappingInfoEntity> list = redirectMappingDao.queryMappingBySerial(serial);
-        if (list != null && list.size() > 0) {
-            TbMappingInfoEntity tbMappingInfoEntity = list.get(0);
-            if (tbMappingInfoEntity.getStatus().equals("1")) {
-                String downSerial = tbMappingInfoEntity.getDownserial();
-                List<TbDownManageInfoEntity> downList = redirectMappingDao.queryDownManageBySerial(downSerial);
-                if (downList != null && downList.size() > 0) {
-                    TbDownManageInfoEntity downInfo = downList.get(0);
-                    if (downInfo.getStatus().equals("1")) {
-                        String upSerial = tbMappingInfoEntity.getUpserial();
-                        List<TbUpManangeInfoEntity> upList = redirectMappingDao.queryUpManageBySerial(upSerial);
-                        if (upList != null && upList.size() > 0) {
-                            TbUpManangeInfoEntity upInfo = upList.get(0);
-                            if (upInfo.getStatus().equals("1")) {
-                                String upUrl = upInfo.getUrl();
-                                pd.remove("private");
-                                url = upUrl+"?"+createLinkStringByGet(pd);
+
+        if(!StringUtils.isEmpty(serial)){
+            //添加一个响应表，用来将下游反馈的结果和上游的地址进行关联，方便后期callback 的结果进行反馈
+
+            PageData downMappingPd = new PageData();
+            downMappingPd.put("mappingserial",serial);
+            downMappingPd.put("pars",pd.toString());
+            String idfa = (String) pd.get("idfa");
+            downMappingPd.put("idfa",idfa);
+            String callback = (String) pd.get("callback");
+            downMappingPd.put("callback",callback);
+            List<TbDownMappingInfoEntity> downMappingInfo = redirectMappingDao.queryDownMappingInfo(serial,idfa);
+            if(downMappingInfo!=null && downMappingInfo.size()>0){
+                TbDownMappingInfoEntity tbDownMappingInfoEntity = downMappingInfo.get(0);
+                redirectMappingDao.updateDownMappingInfo(tbDownMappingInfoEntity.getSerial(),pd.toString(),callback);
+            }else{
+                redirectMappingDao.saveDownMappingInfo(downMappingPd);
+            }
+            List<TbMappingInfoEntity> list = redirectMappingDao.queryMappingBySerial(serial);
+            if (list != null && list.size() > 0) {
+                TbMappingInfoEntity tbMappingInfoEntity = list.get(0);
+                Integer clickrate = tbMappingInfoEntity.getClickrate();
+                if(clickrate!=null && clickrate>0){
+                    clickrate++;
+                }else{
+                    clickrate = 1;
+                }
+                redirectMappingDao.updateMappingClickrateInfo(serial,clickrate);
+                if (tbMappingInfoEntity.getStatus().equals("1")) {
+                    String downSerial = tbMappingInfoEntity.getDownserial();
+                    List<TbDownManageInfoEntity> downList = redirectMappingDao.queryDownManageBySerial(downSerial);
+                    if (downList != null && downList.size() > 0) {
+                        TbDownManageInfoEntity downInfo = downList.get(0);
+                        if (downInfo.getStatus().equals("1")) {
+                            String upSerial = tbMappingInfoEntity.getUpserial();
+                            List<TbUpManangeInfoEntity> upList = redirectMappingDao.queryUpManageBySerial(upSerial);
+                            if (upList != null && upList.size() > 0) {
+                                TbUpManangeInfoEntity upInfo = upList.get(0);
+                                Integer upClickrate = upInfo.getClickrate();
+                                if(upClickrate!=null && upClickrate>0){
+                                    upClickrate++;
+                                }else{
+                                    upClickrate = 1;
+                                }
+                                redirectMappingDao.updateUpManageClickrateInfo(upSerial,upClickrate);
+                                if (upInfo.getStatus().equals("1")) {
+                                    List<TbUpManangeParamInfoEntity> upManangeParamInfoEntityList = redirectManageDao.queryUpManageParamByUpSerialInfo(upSerial);
+                                    if(upManangeParamInfoEntityList!=null && upManangeParamInfoEntityList.size()>0){
+                                        for(TbUpManangeParamInfoEntity p:upManangeParamInfoEntityList){
+                                            String value = p.getValue();
+                                            String code = p.getCode();
+                                            if(!StringUtils.isEmpty(value)){
+                                                pd.put(code,value);
+                                            }
+                                        }
+                                    }
+                                    String upUrl = upInfo.getUrl();
+                                    pd.remove("private");
+                                    url = upUrl+"?"+createLinkStringByGet(pd);
+                                }
                             }
                         }
                     }
                 }
             }
         }
+
         return url;
     }
 

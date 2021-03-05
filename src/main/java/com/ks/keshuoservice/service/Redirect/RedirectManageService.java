@@ -150,62 +150,19 @@ public class RedirectManageService {
                                 for(int i=0;i<num;i++){
                                     StringBuffer sb = new StringBuffer();
                                     sb.append(url);
-                                    Boolean wHBool = url.contains("?");
-                                    Boolean dLBool = url.contains("&");
                                     String privateSerial = redirectManageDao.getUUID();
+                                    sb.append("?private="+privateSerial);
+                                    sb.append("&callback={callback}");
+
                                     if(list!=null && list.size()>0){
-                                        if(wHBool && dLBool){
                                             for(TbUpManangeParamInfoEntity p:list){
                                                 String code = p.getCode();
                                                 String value = p.getValue();
                                                 if(StringUtils.isBlank(value)){
                                                     value = "{"+code+"}";
-                                                }
-                                                sb.append("&"+code+"="+value);
-                                            }
-                                        }else if(wHBool && !dLBool){
-                                            for(TbUpManangeParamInfoEntity p:list){
-                                                String code = p.getCode();
-                                                String value = p.getValue();
-                                                if(StringUtils.isBlank(value)){
-                                                    value = "{"+code+"}";
-                                                }
-                                                sb.append("&"+code+"="+value);
-                                            }
-                                        }else{
-                                            TbUpManangeParamInfoEntity param = list.get(0);
-                                            String code = param.getCode();
-                                            String value = param.getValue();
-                                            if(StringUtils.isBlank(value)){
-                                                value = "{"+code+"}";
-                                            }
-                                            sb.append("?"+code+"="+value);
-                                            if(list!=null && list.size()>0){
-                                                for(TbUpManangeParamInfoEntity p:list){
-                                                    if(p.getSerial().equals(param.getSerial())){
-
-                                                    }else{
-                                                        String code1 = p.getCode();
-                                                        String value1 = p.getValue();
-                                                        if(StringUtils.isBlank(value1)){
-                                                            value1 = "{"+code1+"}";
-                                                        }
-                                                        sb.append("&"+code1+"="+value1);
-                                                    }
+                                                    sb.append("&"+code+"="+value);
                                                 }
                                             }
-                                        }
-
-                                        sb.append("&private="+privateSerial);
-
-                                    }else{
-                                        if(wHBool && dLBool){
-                                            sb.append("&private="+privateSerial);
-                                        }else if(wHBool && !dLBool){
-                                            sb.append("&private="+privateSerial);
-                                        }else{
-                                            sb.append("?private="+privateSerial);
-                                        }
                                     }
                                     PageData buildPd = new PageData();
                                     String sbUrl = sb.toString();

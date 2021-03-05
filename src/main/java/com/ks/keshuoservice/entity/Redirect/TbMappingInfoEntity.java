@@ -16,6 +16,15 @@ public class TbMappingInfoEntity implements Serializable {
     private String status;
     private String updatetime;
     private String updateuser;
+    private Integer clickrate;
+
+    public Integer getClickrate() {
+        return clickrate;
+    }
+
+    public void setClickrate(Integer clickrate) {
+        this.clickrate = clickrate;
+    }
 
     public String getSerial() {
         return serial;

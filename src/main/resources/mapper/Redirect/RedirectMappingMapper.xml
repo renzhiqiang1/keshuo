@@ -61,6 +61,16 @@
     </update>
 
 
+
+    <insert id="saveDownMappingInfo" parameterType="pd">
+        insert into tb_downmappinginfo(
+        serial,mappingserial,pars,idfa,callback
+        ) values (
+         UUID_SHORT(),#{mappingserial},#{pars},#{idfa},#{callback}
+        )
+    </insert>
+
+
 </mapper>
 
 

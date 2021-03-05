@@ -155,6 +155,18 @@ public class InterfaceService {
             PageData savePd = new PageData();
             savePd.put("callback",pd.toString());
             interfaceDao.saveCallBackInfo(savePd);
+            //根据扣量进行反馈 将callback 中的idfa 值查询tb_downmappinginfo 反馈到对应的callback 中
+            //总数/percent 取整数
+            /*Integer count = 100;
+            String countStr = String.valueOf(count);
+            Double perDou = Double.parseDouble(percent);
+            Double countDou = Double.parseDouble(countStr);
+            if(perDou<=100){
+                int size = (int) Math.ceil(countDou/perDou);
+                System.out.println(size);
+                //循环结果进行反馈
+            }*/
+
         }
     }
 
