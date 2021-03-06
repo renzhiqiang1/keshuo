@@ -125,7 +125,7 @@ public class RedirectInterService {
         for (int i = 0; i < keys.size(); i++) {
             String key = keys.get(i);
             String value = params.get(key);
-            value = URLEncoder.encode(value, "UTF-8");
+//            value = URLEncoder.encode(value, "UTF-8");
             if (i == keys.size() - 1) {//拼接时，不包括最后一个&字符
                 prestr = prestr + key + "=" + value;
             } else {
