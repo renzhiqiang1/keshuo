@@ -6,7 +6,7 @@
 
 	<!--设置系统日志目录-->
 	<property name="APP_DIR" value="keshuo-services"/>
-	<property name="LOG_PATH" value="keshuo/log"/>  <!--日志保存地址-->
+	<property name="LOG_PATH" value="D:/project/callLog"/>  <!--日志保存地址-->
 	<property name="FILESIZE" value="50MB" />
 	<!-- <property name="LOG_PATH" value="/opt/sys/log/tjJcwSimple"/> -->
 
