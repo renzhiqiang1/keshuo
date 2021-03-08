@@ -98,6 +98,7 @@ public class RedirectInterService {
                                     }
                                     String upUrl = upInfo.getUrl();
                                     pd.remove("private");
+                                    pd.remove("callback");
                                     url = upUrl+"?"+createLinkStringByGet(pd);
                                 }
                             }
